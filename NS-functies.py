@@ -22,3 +22,4 @@ def ritprijs(leeftijd, weekendrit, afstandKM):
 
 
 ritprijs(11, True, 30)
+ritprijs(14, False, 420)
