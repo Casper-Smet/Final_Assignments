@@ -13,13 +13,14 @@ def standaardprijs(afstandKM):
 def ritprijs(leeftijd, weekendrit, afstandKM):
     KMprijs = standaardprijs(afstandKM)
     if weekendrit and (leeftijd < 12 or leeftijd >= 65):
-        KMprijs = KMprijs * 0.65
+        KMprijs = KMprijs * 65 / 100
     elif weekendrit == False and (leeftijd < 12 or leeftijd >= 65):
-        KMprijs = KMprijs * 0.7
+        KMprijs = KMprijs * 70 / 100
     elif weekendrit:
-        KMprijs = KMprijs * 0.6
-    print(str(KMprijs) + " cent")
+        KMprijs = KMprijs * 60 / 100
+    KMprijs_cent = int(KMprijs % 100)
+    print(str(int(KMprijs / 100)), " euro en ", str(KMprijs_cent), " cent")
 
 
-ritprijs(11, True, 30)
+ritprijs(11, True, 31)
 ritprijs(14, False, 420)
