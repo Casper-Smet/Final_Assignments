@@ -6,7 +6,7 @@ def standaardprijs(afstandKM):
     elif afstandKM <= 50:
         KMprijs = afstandKM * 80
     else:
-        KMprijs = 15 + 60 * (afstandKM - 50)
+        KMprijs = 1500 + 60 * (afstandKM - 50)
     return KMprijs
 
 
@@ -19,8 +19,59 @@ def ritprijs(leeftijd, weekendrit, afstandKM):
     elif weekendrit:
         KMprijs = KMprijs * 60 / 100
     KMprijs_cent = int(KMprijs % 100)
-    print(str(int(KMprijs / 100)), " euro en ", str(KMprijs_cent), " cent")
+    print(str(int(KMprijs / 100)), "euro en", str(KMprijs_cent), "cent voor een afgelegde afstand van", str(afstandKM), "km")
 
 
-ritprijs(11, True, 31)
-ritprijs(14, False, 420)
+def ns_test():
+    #leeftijd 11; variaties:
+    print("\nTest met leeftijd 11")
+    ritprijs(11, True, 31)
+    ritprijs(11, False, 31)
+    ritprijs(11, True, -10)
+    ritprijs(11, False, -10)
+    ritprijs(11, True, 70)
+    ritprijs(11, False, 70)
+    #leeftijd 12; variaties:
+    print("\nTest met leeftijd 12")
+    ritprijs(12, True, 42)
+    ritprijs(12, False, 42)
+    ritprijs(12, True, -96)
+    ritprijs(12, False, -96)
+    ritprijs(12, True, 80)
+    ritprijs(12, False, 80)
+    #leeftijd 64; variaties:
+    print("\nTest met leeftijd 64")
+    ritprijs(64, True, 45)
+    ritprijs(64, False, 45)
+    ritprijs(64, True, -1)
+    ritprijs(64, False, -1)
+    ritprijs(64, True, 60)
+    ritprijs(64, False, 60)
+    #leeftijd 65; variaties:
+    print("\nTest met leeftijd 65")
+    ritprijs(65, True, 18)
+    ritprijs(65, False, 18)
+    ritprijs(65, True, -990)
+    ritprijs(65, False, -990)
+    ritprijs(65, True, 98)
+    ritprijs(65, False, 98)
+
+
+keuze = int(input("Standaardtestprogramma(1)/zelf informatie invullen(2): "))
+
+if keuze == 1:
+    ns_test()
+elif keuze == 2:
+    leeftijd = int(input("Hoe oud bent u: "))
+    weekendrit = input("Is het een weekendrit (Ja/Nee): ")
+    if weekendrit == "Ja":
+        weekendrit = True
+    elif weekendrit == "Nee":
+        weekendrit = False
+    else:
+        print("Geef of 'Ja' of 'Nee' aan. Hoofdletters zijn belangrijk!")
+    afstandKM = int(input("Hoeveel kilometer reist u: "))
+    print(weekendrit)
+
+    ritprijs(leeftijd, weekendrit, afstandKM)
+
