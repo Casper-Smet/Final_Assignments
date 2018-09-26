@@ -2,7 +2,6 @@ def standaardprijs(afstandKM):
 
     if afstandKM < 0:
         KMprijs = 0
-
     elif afstandKM <= 50:
         KMprijs = afstandKM * 80
     else:
@@ -58,20 +57,23 @@ def ns_test():
 
 
 keuze = int(input("Standaardtestprogramma(1)/zelf informatie invullen(2): "))
-
-if keuze == 1:
-    ns_test()
-elif keuze == 2:
-    leeftijd = int(input("Hoe oud bent u: "))
-    weekendrit = input("Is het een weekendrit (Ja/Nee): ")
-    if weekendrit == "Ja":
-        weekendrit = True
-    elif weekendrit == "Nee":
-        weekendrit = False
+while True:
+    if keuze == 1:
+        ns_test()
+        break
+    elif keuze == 2:
+        leeftijd = int(input("Hoe oud bent u: "))
+        weekendrit = input("Is het een weekendrit (Ja/Nee): ")
+        if weekendrit == "Ja":
+            weekendrit = True
+        elif weekendrit == "Nee":
+            weekendrit = False
+        else:
+            print("Geef of 'Ja' of 'Nee' aan. Hoofdletters zijn belangrijk!")
+            continue
+        afstandKM = int(input("Hoeveel kilometer reist u: "))
+        ritprijs(leeftijd, weekendrit, afstandKM)
+        break
     else:
-        print("Geef of 'Ja' of 'Nee' aan. Hoofdletters zijn belangrijk!")
-    afstandKM = int(input("Hoeveel kilometer reist u: "))
-    print(weekendrit)
-
-    ritprijs(leeftijd, weekendrit, afstandKM)
-
+        print("Voer een geldig getal in.")
+        break
