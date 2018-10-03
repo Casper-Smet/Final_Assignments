@@ -29,7 +29,7 @@ def nieuw_kluis():
 
 
 def kluis_openen():
-
+    return
 
 
 def kluis_teruggeven():
