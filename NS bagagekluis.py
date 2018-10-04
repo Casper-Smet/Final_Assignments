@@ -1,6 +1,6 @@
 def toon_aantal_kluizen_vrij():
     global aantal_kluizen
-    print(aantal_kluizen, end="\n\n\n")
+    print("er zijn nog", aantal_kluizen, "kluizen vrij.", end="\n\n\n")
     file_reader.close()
 
 
@@ -24,18 +24,23 @@ def nieuw_kluis():
             if len(code) >= 4:
                 code_check = True
         file_reader.close()
-        file_appender.write("\n{};{}".format(kluizen_totaal[0], code))
+        if aantal_kluizen < 12:
+            file_appender.write("\n{};{}".format(kluizen_totaal[0], code))
+        else:
+            file_appender.write("{};{}".format(kluizen_totaal[0], code))
         file_appender.close()
-        print("Je krijgt kluisje nummer: {} \nje passcode is: {}".format(kluizen_totaal[0], code))
+        print("Je krijgt kluisje nummer: {} \nje passcode is: {}\n\n\n".format(kluizen_totaal[0], code))
     else:
-        print("Sorry! Er zijn 0 kluisjes beschikbaar")
+        print("Sorry! Er zijn 0 kluisjes beschikbaar\n\n\n")
         return
+
 
 def kluis_openen():
     global file_lines
     global split_lines
     kluis_nummer = str(input("Voer kluisnummer in: "))
     while True:
+        kluis_check = False
         for i in range(len(file_lines)):
             split_lines = file_lines[i].strip()
             split_lines = split_lines.split(";")
@@ -43,13 +48,11 @@ def kluis_openen():
                 kluis_code = str(input("Voer uw code in: "))
                 if kluis_code == split_lines[1]:
                     print("U heeft toegang tot uw kluisje\n\n\n")
+                    kluis_check = True
+                    #debug print("regel49")
                     break
-                else:
-                    print("Dit wachtwoord of kluisnummer is incorrect. regel 46")
-                    break
-            else:
-                print("Dit wachtwoord of kluisnummer is incorrect. regel 48\n\n\n")
-                break
+        if not kluis_check:
+            print("Dit wachtwoord of kluisnummer is incorrect. \n\n\n")
         file_reader.close()
         break
 
@@ -59,6 +62,7 @@ def kluis_teruggeven():
     global split_lines
     kluis_nummer = str(input("Voer kluisnummer in: "))
     while True:
+        kluis_check = False
         for i in range(len(file_lines)):
             split_lines = file_lines[i].strip()
             split_lines = split_lines.split(";")
@@ -76,21 +80,16 @@ def kluis_teruggeven():
                             else:
                                 recombined_lines = str(split_lines[0] + ";" + split_lines[1])
                             file_writer.write(recombined_lines)
-                            print(recombined_lines )
+                            # debug: print(recombined_lines)
+                            file_writer.close()
+                            kluis_check = True
                     break
-                else:
-                    print("Dit wachtwoord of kluisnummer is incorrect. regel 70")
-            else:
-                print("Dit wachtwoord of kluisnummer is incorrect. regel 72\n\n\n")
-
+        if not kluis_check:
+            print("Dit wachtwoord of kluisnummer is incorrect. \n\n\n")
+            #debug print("REGEL 90")
         file_reader.close()
         file_appender.close()
-        #file_writer.close()
         break
-
-
-
-
 
 
 while True:
@@ -98,19 +97,28 @@ while True:
     file_appender = open(r"kluizen.txt", "a")
     file_lines = file_reader.readlines()
     aantal_kluizen = 12 - len(file_lines)
-    print("1: Ik wil weten hoeveel kluizen nog vrij zijn")
-    print("2: Ik wil een nieuwe kluis")
-    print("3: Ik wil even iets uit mijn kluis halen")
-    print("4: Ik geef mijn kluis terug")
-    menu_keuze = int(input())
-    if menu_keuze == 1:
+    try:
+        print("="*46)
+        print("1: Ik wil weten hoeveel kluizen nog vrij zijn")
+        print("2: Ik wil een nieuwe kluis")
+        print("3: Ik wil even iets uit mijn kluis halen")
+        print("4: Ik geef mijn kluis terug")
+        print("5: Help, haal me uit deze loop!")
+        print("="*46)
+        menu_keuze = 0
+        menu_keuze = int(input())
+    except ValueError:
+        print("Voer een geldige waarde in.")
+    if menu_keuze > 5 or menu_keuze < 1:
+        print("Voer een geldige waarde in")
+    elif menu_keuze == 1:
         toon_aantal_kluizen_vrij()
-        break
     elif menu_keuze == 2:
         nieuw_kluis()
-        break
     elif menu_keuze == 3:
         kluis_openen()
-        break
     elif menu_keuze == 4:
         kluis_teruggeven()
+    elif menu_keuze == 5:
+        print("Fijne dag")
+        break
