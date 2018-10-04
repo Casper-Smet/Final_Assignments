@@ -39,13 +39,13 @@ def kluis_openen():
     global file_lines
     global split_lines
     kluis_nummer = str(input("Voer kluisnummer in: "))
+    kluis_code = str(input("Voer uw code in: "))
     while True:
         kluis_check = False
         for i in range(len(file_lines)):
             split_lines = file_lines[i].strip()
             split_lines = split_lines.split(";")
             if kluis_nummer == split_lines[0]:
-                kluis_code = str(input("Voer uw code in: "))
                 if kluis_code == split_lines[1]:
                     print("U heeft toegang tot uw kluisje\n\n\n")
                     kluis_check = True
@@ -61,13 +61,13 @@ def kluis_teruggeven():
     global file_lines
     global split_lines
     kluis_nummer = str(input("Voer kluisnummer in: "))
+    kluis_code = str(input("Voer uw code in: "))
     while True:
         kluis_check = False
         for i in range(len(file_lines)):
             split_lines = file_lines[i].strip()
             split_lines = split_lines.split(";")
             if kluis_nummer == split_lines[0]:
-                kluis_code = str(input("Voer uw code in: "))
                 if kluis_code == split_lines[1]:
                     print("Uw kluisje is vrijgegeven.\n\n\n")
                     for i in range(len(file_lines)):
