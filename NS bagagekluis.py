@@ -93,8 +93,8 @@ def kluis_teruggeven():
 
 
 while True:
-    file_reader = open(r"kluizen.txt", "r")
     file_appender = open(r"kluizen.txt", "a")
+    file_reader = open(r"kluizen.txt", "r")
     file_lines = file_reader.readlines()
     aantal_kluizen = 12 - len(file_lines)
     try:
