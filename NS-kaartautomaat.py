@@ -1,6 +1,6 @@
 def inlezen_beginstation(stations):
     beginstation_input = str(input("Wat is je beginstation?\n"))
-    while beginstation_input not in stations:
+    while beginstation_input not in stations or beginstation_input == 'Maastricht':
         beginstation_input = str(input("Deze trein komt niet in {}. \n"
                                        "Wat is je beginstation?\n".format(beginstation_input)))
     return beginstation_input
@@ -8,10 +8,7 @@ def inlezen_beginstation(stations):
 
 def inlezen_eindstation(stations, beginstation):
     eindstation_input = str(input("Wat is je eindstation?\n"))
-    while eindstation_input not in stations:
-        eindstation_input = str(input("Deze trein komt niet in {}.\n"
-                                      "Wat is je eindstation?\n".format(eindstation_input)))
-    while not stations.index(eindstation_input) > stations.index(beginstation):
+    while eindstation_input not in stations or not stations.index(eindstation_input) > stations.index(beginstation):
         eindstation_input = str(input("Deze trein komt niet in {}.\n"
                                       "Wat is je eindstation?\n".format(eindstation_input)))
     return eindstation_input
